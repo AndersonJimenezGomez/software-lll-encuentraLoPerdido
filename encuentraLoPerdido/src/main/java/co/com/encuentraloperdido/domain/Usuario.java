@@ -1,5 +1,6 @@
 package co.com.encuentraloperdido.domain;
 
+import co.com.encuentraloperdido.bussinesexception.usuario.ClaveInseguraException;
 import co.com.encuentraloperdido.bussinesexception.usuario.CorreoNoValidoException;
 import co.com.encuentraloperdido.bussinesexception.usuario.NombreOApellidoNoValidoException;
 import co.com.encuentraloperdido.message.Mensaje;
@@ -16,7 +17,7 @@ public class Usuario {
     private String correo;
     private String clave;
 
-    public Usuario(Long idUsuario, String nombre, String apellido, String correo, String clave) {
+    public Usuario(Long idUsuario, String nombre, String apellido, String correo, String clave)/*throws NombreOApellidoNoValidoException, CorreoNoValidoException,ClaveInseguraException,CorreoNoValidoException */{
             this.setIdUsuario(idUsuario);
             this.setApellido(apellido);
             this.setCorreo(correo);
@@ -24,7 +25,7 @@ public class Usuario {
             this.setClave(clave);
 
     }
-
+/*
     public String getNombre() {
         return nombre;
     }
@@ -65,8 +66,13 @@ public class Usuario {
         return clave;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setClave(String clave) throws ClaveInseguraException {
+        if(validarClave()){
+            this.clave = clave;
+        }else{
+            throw new ClaveInseguraException(Mensaje.Usuario.CLAVE_NO_VALIDA);
+        }
+
     }
 
     public void setApellido(String apellido)throws NombreOApellidoNoValidoException {
@@ -76,7 +82,7 @@ public class Usuario {
             throw new NombreOApellidoNoValidoException(Mensaje.Usuario.APELLIDO_O_NOMBRE_NO_VALIDO);
         }
     }
-
+*/
     public boolean validarCadenaNoContengaNumeros(String cadena){
         boolean cadenaEsValida = false;
         if(cadena.matches("[a-zA-Z]+")){
@@ -97,9 +103,22 @@ public class Usuario {
     public boolean validarClave(){
         boolean claveSegura;
         claveSegura = false;
-        if(clave.contains("[0-9]")){
+        if(clave.matches("^[0-9]+[a-zA-Z0-9]+|[a-zA-Z0-9]+[0-9]+[a-zA-Z0-9]+|[a-zA-Z0-9]+[0-9]+$") && clave.length()>=8){
             claveSegura = true;
         }
+        System.out.println(claveSegura);
         return claveSegura;
     }
+
+    public boolean validarNulos(){
+        boolean hayNulos;
+        hayNulos = true;
+        if(!nombre.trim().isEmpty()&& nombre !=null && !apellido.trim().isEmpty() && apellido !=null
+           && !correo.trim().isEmpty()&& correo !=null && !clave.trim().isEmpty() && clave !=null){
+            hayNulos = false;
+        }
+        return hayNulos;
+    }
+
+
 }

@@ -48,8 +48,7 @@ public class Lugar {
 
     public boolean validarNulos(){
         boolean hayNulos;
-        hayNulos = true;
-        System.out.println(direccion+" "+ descripcionLugar);
+        hayNulos = true;;
         if(direccion != null && descripcionLugar !=null  && !direccion.isEmpty() && !direccion.trim().isEmpty() &&
                 !descripcionLugar.isEmpty() && !descripcionLugar.trim().isEmpty() ){
             hayNulos =false;
