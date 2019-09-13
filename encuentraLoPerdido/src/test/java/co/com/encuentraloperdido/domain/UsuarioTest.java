@@ -9,104 +9,61 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.*;
-
 public class UsuarioTest {
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void insertarUsuarioNombreInvalido()throws NombreOApellidoNoValidoException{
+    public void insertatUsuarioNombreInvalido()throws NombreOApellidoNoValidoException{
         exception.expect(NombreOApellidoNoValidoException.class);
         exception.expectMessage(Mensaje.Usuario.APELLIDO_O_NOMBRE_NO_VALIDO);
         Usuario usuario = new Usuario();
         usuario.setNombre("Andr3s");
-
     }
 
     @Test
-    public void insertarUsuarioNombreValido()throws NombreOApellidoNoValidoException{
+    public void insertatUsuarioNombreValido()throws NombreOApellidoNoValidoException{
+        //exception.expect(NombreOApellidoNoValidoException.class);
+        //exception.expectMessage(Mensaje.Usuario.APELLIDO_O_NOMBRE_NO_VALIDO);
         Usuario usuario = new Usuario();
         usuario.setNombre("Andres");
+        Assert.assertEquals("Andres",usuario.getNombre());
     }
 
     @Test
-    public void insertarClaveUsuarioValida() throws ClaveInseguraException{
-        exception.expect(ClaveInseguraException.class);
-        exception.expectMessage(Mensaje.Usuario.CLAVE_NO_VALIDA);
-        Usuario usuario = new Usuario();
-        usuario.setClave("andres");
-
-    }
-
-
-    @Test
-    public void insertarUsuarioCorreoInvalido() throws CorreoNoValidoException{
+    public void insertarUsuarioCorreoInValido()throws CorreoNoValidoException{
         exception.expect(CorreoNoValidoException.class);
         exception.expectMessage(Mensaje.Usuario.CORREO_NO_VALIDO);
         Usuario usuario = new Usuario();
-        usuario.setCorreo("andres@hotmail.com");
-    }
-    @Test
-    public void validarCorreoValido()throws CorreoNoValidoException {
-        Usuario usuario = new Usuario();
-        usuario.setCorreo("andres123@gmail.com");
-        Assert.assertTrue(usuario.validarCorreo());
+        usuario.setCorreo("Andres123@hotmail");
     }
 
     @Test
-    public void validarCorreoInValido()throws CorreoNoValidoException{
-        Usuario usuario = new Usuario();
-        usuario.setCorreo("andres123@gmail");
-        Assert.assertFalse(usuario.validarCorreo());
+    public void insertarUsuarioCorreoValido(){
+
     }
 
     @Test
-    public void validarClaveSegura()throws ClaveInseguraException{
+    public void validarClaveInsegura()throws ClaveInseguraException{
+        exception.expect(ClaveInseguraException.class);
+        exception.expectMessage(Mensaje.Usuario.CLAVE_NO_VALIDA);
         Usuario usuario = new Usuario();
-        usuario.setClave("dassdAqweqasda1");
-        Assert.assertTrue(usuario.validarClave());
+        usuario.setClave("Andres");
     }
 
     @Test
-    public void validarClaveInsegura() throws ClaveInseguraException {
-        Usuario usuario = new Usuario();
-        usuario.setClave("dassd");
-        Assert.assertFalse(usuario.validarClave());
-    }
+    public void validarClaveSegura() throws ClaveInseguraException{
 
-    @Test
-    public void validarNombreIncorrecto(){
-        Usuario usuario = new Usuario();
-        usuario.setNombre("andr3s");
-        Assert.assertFalse(usuario.validarCadenaNoContengaNumeros(usuario.getNombre()));
-    }
-
-    @Test
-    public void validarNombreCorrecto(){
-        Usuario usuario = new Usuario();
-        usuario.setNombre("andres");
-        Assert.assertTrue(usuario.validarCadenaNoContengaNumeros(usuario.getNombre()    ));
     }
 
     @Test
     public void validarDatosNulos(){
         Usuario usuario = new Usuario();
-        usuario.setNombre(" ");
-        usuario.setApellido(" ");
-        usuario.setCorreo(" ");
-        usuario.setClave(" ");
-        Assert.assertTrue(usuario.validarNulos());
+        boolean esNulo;
+        esNulo = usuario.validarNulos();
+        Assert.assertTrue(esNulo);
     }
 
-    @Test
-    public void validarDatosNoNulos(){
-        Usuario usuario = new Usuario();
-        usuario.setNombre("andres");
-        usuario.setApellido("garcia");
-        usuario.setCorreo("andres@hotmail.com");
-        usuario.setClave("123321123");
-        Assert.assertFalse(usuario.validarNulos());
-    }
+
 }

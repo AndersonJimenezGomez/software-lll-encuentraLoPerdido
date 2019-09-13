@@ -17,7 +17,7 @@ public class Usuario {
     private String correo;
     private String clave;
 
-    public Usuario(Long idUsuario, String nombre, String apellido, String correo, String clave)/*throws NombreOApellidoNoValidoException, CorreoNoValidoException,ClaveInseguraException,CorreoNoValidoException */{
+    public Usuario(Long idUsuario, String nombre, String apellido, String correo, String clave)throws NombreOApellidoNoValidoException, CorreoNoValidoException,ClaveInseguraException,CorreoNoValidoException {
             this.setIdUsuario(idUsuario);
             this.setApellido(apellido);
             this.setCorreo(correo);
@@ -25,13 +25,13 @@ public class Usuario {
             this.setClave(clave);
 
     }
-/*
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre)throws NombreOApellidoNoValidoException {
-        if(validarCadenaNoContengaNumeros(nombre)) {
+        if(validarCadenaNoContengaNumeros(nombre) && validarNulos()) {
             this.nombre = nombre;
         }else{
             throw new NombreOApellidoNoValidoException(Mensaje.Usuario.APELLIDO_O_NOMBRE_NO_VALIDO);
@@ -55,7 +55,7 @@ public class Usuario {
     }
 
     public void setCorreo(String correo)throws CorreoNoValidoException{
-        if(validarCorreo()) {
+        if(validarCorreo(correo)&& validarNulos()) {
             this.correo = correo;
         }else{
             throw new CorreoNoValidoException(Mensaje.Usuario.CORREO_NO_VALIDO);
@@ -67,7 +67,7 @@ public class Usuario {
     }
 
     public void setClave(String clave) throws ClaveInseguraException {
-        if(validarClave()){
+        if(validarClave(clave)&& validarNulos()){
             this.clave = clave;
         }else{
             throw new ClaveInseguraException(Mensaje.Usuario.CLAVE_NO_VALIDA);
@@ -76,13 +76,13 @@ public class Usuario {
     }
 
     public void setApellido(String apellido)throws NombreOApellidoNoValidoException {
-        if(validarCadenaNoContengaNumeros(apellido)) {
+        if(validarCadenaNoContengaNumeros(apellido)&& validarNulos()) {
             this.nombre = apellido;
         }else{
             throw new NombreOApellidoNoValidoException(Mensaje.Usuario.APELLIDO_O_NOMBRE_NO_VALIDO);
         }
     }
-*/
+
     public boolean validarCadenaNoContengaNumeros(String cadena){
         boolean cadenaEsValida = false;
         if(cadena.matches("[a-zA-Z]+")){
@@ -92,7 +92,7 @@ public class Usuario {
 
     }
 
-    public boolean validarCorreo(){
+    public boolean validarCorreo(String correo){
         boolean correoValido = false;
         if(correo.contains("@") && correo.contains(".com")){
             correoValido = true;
@@ -100,21 +100,20 @@ public class Usuario {
         return correoValido;
     }
 
-    public boolean validarClave(){
+    public boolean validarClave(String clave){
         boolean claveSegura;
         claveSegura = false;
         if(clave.matches("^[0-9]+[a-zA-Z0-9]+|[a-zA-Z0-9]+[0-9]+[a-zA-Z0-9]+|[a-zA-Z0-9]+[0-9]+$") && clave.length()>=8){
             claveSegura = true;
         }
-        System.out.println(claveSegura);
         return claveSegura;
     }
 
     public boolean validarNulos(){
         boolean hayNulos;
         hayNulos = true;
-        if(!nombre.trim().isEmpty()&& nombre !=null && !apellido.trim().isEmpty() && apellido !=null
-           && !correo.trim().isEmpty()&& correo !=null && !clave.trim().isEmpty() && clave !=null){
+        if(nombre !=null && !nombre.trim().isEmpty()  && apellido !=null && !apellido.trim().isEmpty()
+                && correo !=null&& !correo.trim().isEmpty() && !clave.trim().isEmpty() && clave !=null){
             hayNulos = false;
         }
         return hayNulos;
