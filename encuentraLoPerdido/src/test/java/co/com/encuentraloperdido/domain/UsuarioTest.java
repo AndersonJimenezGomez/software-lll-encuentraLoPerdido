@@ -9,13 +9,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+
 public class UsuarioTest {
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
+
     @Test
-    public void insertatUsuarioNombreInvalido()throws NombreOApellidoNoValidoException{
+    public void insertarUsuarioNombreNoValido()throws NombreOApellidoNoValidoException{
         exception.expect(NombreOApellidoNoValidoException.class);
         exception.expectMessage(Mensaje.Usuario.APELLIDO_O_NOMBRE_NO_VALIDO);
         Usuario usuario = new Usuario();
@@ -24,11 +26,10 @@ public class UsuarioTest {
 
     @Test
     public void insertatUsuarioNombreValido()throws NombreOApellidoNoValidoException{
-        //exception.expect(NombreOApellidoNoValidoException.class);
-        //exception.expectMessage(Mensaje.Usuario.APELLIDO_O_NOMBRE_NO_VALIDO);
         Usuario usuario = new Usuario();
         usuario.setNombre("Andres");
         Assert.assertEquals("Andres",usuario.getNombre());
+
     }
 
     @Test
@@ -40,8 +41,10 @@ public class UsuarioTest {
     }
 
     @Test
-    public void insertarUsuarioCorreoValido(){
-
+    public void insertarUsuarioCorreoValido()throws  CorreoNoValidoException{
+        Usuario usuario = new Usuario();
+        usuario.setCorreo("Andres123@hotmail.com");
+        Assert.assertEquals("Andres123@hotmail.com", usuario.getCorreo());
     }
 
     @Test
@@ -54,6 +57,9 @@ public class UsuarioTest {
 
     @Test
     public void validarClaveSegura() throws ClaveInseguraException{
+        Usuario usuario = new Usuario();
+        usuario.setClave("Andres123123");
+        Assert.assertEquals("Andres123123",usuario.getClave());
 
     }
 

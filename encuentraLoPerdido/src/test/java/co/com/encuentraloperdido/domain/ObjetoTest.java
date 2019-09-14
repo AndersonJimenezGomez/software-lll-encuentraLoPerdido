@@ -16,29 +16,26 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class ObjetoTest {
 
-    @Test
+   /* @Test
     public void insertaFechaValida() throws ParseException {
         Objeto objeto = new Objeto();
         SimpleDateFormat sdf = new SimpleDateFormat("MM-DD-YYYY");
         objeto.setFecha(sdf.parse("9-12-2019"));
         Assert.assertTrue(objeto.validarFecha());
 
-    }
+    }*/
 
     @Test
     public void insertarFechaInvalida() throws ParseException {
         Objeto objeto = new Objeto();
-        //LocalDate today = LocalDate.of(2019,9,12);
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2019);
-        calendar.set(Calendar.MONTH, 1);
-        calendar.set(Calendar.DAY_OF_MONTH,30);
-        Date date = calendar.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+        objeto.setFecha(new Date("Feb 29 2015"));
+        Assert.assertFalse(objeto.validarFecha("Feb 29 2015"));
+    }
 
-        objeto.setFecha( sdf.parse(sdf.format(date)));
-        Assert.assertFalse(objeto.validarFecha());
-
+    @Test
+    public void insertarFechaValida() throws ParseException {
+        Objeto objeto = new Objeto();
+        objeto.setFecha(new Date("Feb 29 2016"));
+        Assert.assertTrue(objeto.validarFecha("Feb 29 2016"));
     }
 }

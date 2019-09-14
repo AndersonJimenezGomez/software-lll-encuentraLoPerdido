@@ -30,8 +30,8 @@ public class PublicacionServiceImpl implements IPublicacionService{
     }
 
     @Override
-    public void save(PublicacionEntity personaEntity) {
-        publicacionRepository.save(personaEntity);
+    public void save(PublicacionEntity publicacionEntity) {
+        publicacionRepository.save(publicacionEntity);
     }
 
 }

@@ -2,8 +2,9 @@ package co.com.encuentraloperdido.domain;
 
 import lombok.Data;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Data
 public class Objeto {
@@ -12,28 +13,18 @@ public class Objeto {
     private String descripcion;
     private Date fecha;
 
-    public boolean validarFecha(){
-        //abril,junio,septiembre,noviembre =30
-        //enero,marzo,mayo,julio,agosto,octubre,diciembre = 31
-        //febrero = 28 o 29
+    public boolean validarFecha(String fechaAValidar){
 
-        int mes = fecha.getMonth();
-        int dia = fecha.getDay();
-        int año = fecha.getYear();
-
-        int diasMeses [] = {31,28,31,30,31,30,31,31,30,31,30,31};
-
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(fecha);
         boolean fechaValida;
-        fechaValida = false;
-        if(mes!=2 && diasMeses[mes]>=dia){
-            fechaValida = true;
+        fechaValida = true;
+        String[] fecha ;
+        fecha = fechaAValidar.split(" ");
+        if (!calendar.getTime().toString().contains(fecha[0]) || !calendar.getTime().toString().contains(fecha[1])||!calendar.getTime().toString().contains(fecha[2])){
+            fechaValida = false;
         }
-        else if(año%4 ==0 && mes ==2 && dia<= 28){
-            fechaValida = true;
-        }
-
         return fechaValida;
-
 
     }
 }
