@@ -1,7 +1,9 @@
 package co.com.encuentraloperdido.bussinesexception.usuario;
 
 
-public class CorreoNoValidoException extends Exception {
+import co.com.encuentraloperdido.bussinesexception.BusinessException;
+
+public class CorreoNoValidoException extends BusinessException {
 
     public CorreoNoValidoException(String mensaje){
         super(mensaje);

@@ -1,6 +1,8 @@
 package co.com.encuentraloperdido.bussinesexception.usuario;
 
-public class NombreOApellidoNoValidoException extends Exception{
+import co.com.encuentraloperdido.bussinesexception.BusinessException;
+
+public class NombreOApellidoNoValidoException extends BusinessException {
 
     public NombreOApellidoNoValidoException(String mensaje){
         super(mensaje);
