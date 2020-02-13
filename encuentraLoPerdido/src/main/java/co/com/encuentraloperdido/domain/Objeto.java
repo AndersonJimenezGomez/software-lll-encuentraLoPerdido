@@ -2,9 +2,8 @@ package co.com.encuentraloperdido.domain;
 
 import lombok.Data;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Data
 public class Objeto {

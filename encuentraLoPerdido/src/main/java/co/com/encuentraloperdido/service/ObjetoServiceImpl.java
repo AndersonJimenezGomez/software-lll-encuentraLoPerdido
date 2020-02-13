@@ -1,6 +1,5 @@
 package co.com.encuentraloperdido.service;
 
-import co.com.encuentraloperdido.domain.Objeto;
 import co.com.encuentraloperdido.entity.ObjetoEntity;
 import co.com.encuentraloperdido.repository.IObjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

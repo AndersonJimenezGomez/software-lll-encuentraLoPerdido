@@ -1,6 +1,7 @@
 package co.com.encuentraloperdido.service;
 
-import co.com.encuentraloperdido.entity.LugarEntity;
+import co.com.encuentraloperdido.converter.LugarConverter;
+import co.com.encuentraloperdido.domain.Lugar;
 import co.com.encuentraloperdido.repository.ILugarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,12 @@ public class LugarServiceImpl implements ILugarService{
     @Autowired
     private ILugarRepository lugarRepository;
 
+    @Autowired
+    private LugarConverter lugarConverter;
+
     @Override
-    public List<LugarEntity> findAll() {
-        return lugarRepository.findAll();
+    public List<Lugar> findAll() {
+        return lugarConverter.entityToModel(lugarRepository.findAll());
     }
 
     @Override
@@ -26,12 +30,12 @@ public class LugarServiceImpl implements ILugarService{
     }
 
     @Override
-    public LugarEntity findById(Long id) {
-        return lugarRepository.findById(id).orElse(null);
+    public Lugar findById(Long id) {
+        return lugarConverter.entityToModel(lugarRepository.findById(id).orElse(null));
     }
 
     @Override
-    public void save(LugarEntity lugarEntity) {
-        lugarRepository.save(lugarEntity);
+    public void save(Lugar lugar) {
+        lugarRepository.save(lugarConverter.modelToEntity(lugar));
     }
 }

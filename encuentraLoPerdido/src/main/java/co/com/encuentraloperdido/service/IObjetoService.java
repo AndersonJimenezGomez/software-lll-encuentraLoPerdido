@@ -1,7 +1,5 @@
 package co.com.encuentraloperdido.service;
 
-import co.com.encuentraloperdido.domain.Objeto;
-import co.com.encuentraloperdido.entity.LugarEntity;
 import co.com.encuentraloperdido.entity.ObjetoEntity;
 
 import java.util.List;

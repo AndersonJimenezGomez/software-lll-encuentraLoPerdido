@@ -1,15 +1,15 @@
 package co.com.encuentraloperdido.service;
 
-import co.com.encuentraloperdido.entity.LugarEntity;
+import co.com.encuentraloperdido.domain.Lugar;
 
 import java.util.List;
 
 public interface ILugarService {
-    List<LugarEntity> findAll();
+    List<Lugar> findAll();
 
     void deleteById(Long id);
 
-    LugarEntity findById(Long id);
+    Lugar findById(Long id);
 
-    void save(LugarEntity lugarEntity);
+    void save(Lugar lugar);
 }

@@ -8,34 +8,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/publicacion")
+@RequestMapping("/publicaciones/")
 public class PublicacionController {
 
 
     @Autowired
     private PublicacionServiceImpl publicacionService;
 
-    @GetMapping("/publicaciones")
+    @GetMapping("")
     public List<PublicacionEntity> findAll(){
         return publicacionService.findAll();
     }
 
-    @DeleteMapping("{id}/publicacion")
+    @DeleteMapping("{id}/")
     public void deleteById(@PathVariable(value ="id",required = true) Long id){
         publicacionService.deleteById(id);
     }
 
-    @GetMapping("/{id}/publicacion")
+    @GetMapping("{id}/")
     public PublicacionEntity findById(@PathVariable(value ="id",required = true)Long id){
         return publicacionService.findById(id);
     }
 
-    @PostMapping("/publicacion")
+    @PostMapping("")
     public void insert(@RequestBody PublicacionEntity publicacionEntity){
         publicacionService.save(publicacionEntity);
     }
 
-    @PutMapping("/{id}/publicacion")
+    @PutMapping("{id}/")
     public void update(@RequestBody PublicacionEntity publicacionEntity,@PathVariable(value ="id",required = true) Long id){
         publicacionEntity.setIdPublicacion(id);
         publicacionService.save(publicacionEntity);

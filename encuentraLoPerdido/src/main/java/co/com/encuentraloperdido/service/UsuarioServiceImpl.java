@@ -1,6 +1,5 @@
 package co.com.encuentraloperdido.service;
 
-import co.com.encuentraloperdido.domain.Usuario;
 import co.com.encuentraloperdido.entity.UsuarioEntity;
 import co.com.encuentraloperdido.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,6 @@ import java.util.List;
 
 @Service
 public class UsuarioServiceImpl implements  IUsuarioService {
-
-
-
 
     @Autowired
     private IUsuarioRepository usuarioRepository;
